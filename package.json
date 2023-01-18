@@ -8,7 +8,12 @@
     "build": "cross-env NODE_ENV=production webpack",
     "dist": "npm run build && npm run pack",
     "pack": "nodegui-packer --pack ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretypeorm": "ts-node -r tsconfig-paths/register src/scripts/typeorm030-write-ormconfigts.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm:migration:generate": "npm run typeorm -- migration:generate -d ormconfig.ts ./src/api/Environment/database/migrations/$npm_config_name",
+    "typeorm:migration:run": "npm run typeorm -- migration:run -d ormconfig.ts",
+    "typeorm:migration:revert": "npm run typeorm -- migration:revert -d ormconfig.ts"
   },
   "repository": {
     "type": "git",
@@ -30,12 +35,14 @@
     "@nodegui/qode": "^18.12.1-rc1",
     "@ptkdev/logger": "^1.8.0",
     "alsong": "^3.0.1",
+    "better-sqlite3": "8.0.1",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "deepmerge": "^4.2.2",
     "koa": "^2.14.1",
     "koa-bodyparser": "^4.3.0",
-    "koa-router": "^12.0.0"
+    "koa-router": "^12.0.0",
+    "typeorm": "0.3.11"
   },
   "devDependencies": {
     "@nodegui/packer": "^1.5.0",
